@@ -14,7 +14,7 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
-
+DBHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
         //Parse intent
         Intent in = getIntent();
         Integer index = in.getIntExtra("index",0);
-        User user1 = User.userList.get(index);
+        db = new DBHandler(this,null,null,1);
+        User user1 = db.GetUsers().get(index);
         //get  widgets
         TextView nameTextView = (TextView) findViewById(R.id.nameTextView);
         TextView descriptionTextView = (TextView) findViewById(R.id.descriptionTextView);
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Followed",Toast.LENGTH_SHORT).show();
 
                 }
+
+                db.updateUser(user1);
             }
         });
     }

@@ -34,6 +34,16 @@ public class ListActivity extends AppCompatActivity {
             }
             userList.add(new User("Name "+randomNumber,"Description "+randomNumber,randomNo,fol));
         }
+        DBHandler db = new DBHandler(this,null,null,1);
+        if(db.GetUsers().size()==0){
+            for(User u:userList){
+                db.AddUser(u);
+            }
+        }else{
+            userList.clear();
+            userList = db.GetUsers();
+        }
+
         RecyclerView rv = findViewById(R.id.recyclerView1);
         UsersAdapter adapter = new UsersAdapter(this,userList);
         LinearLayoutManager lm = new LinearLayoutManager(this);

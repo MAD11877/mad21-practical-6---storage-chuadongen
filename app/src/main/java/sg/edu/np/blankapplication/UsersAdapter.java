@@ -51,7 +51,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {
                 builder.setPositiveButton("View", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int id){
                         Intent i = new Intent(context,MainActivity.class);
-                        i.putExtra("index",User.userList.indexOf(u));
+                        i.putExtra("index",data.indexOf(u));
                         context.startActivity(i);
                     }
                 });
@@ -74,7 +74,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        String name = User.userList.get(position).name;
+        String name = data.get(position).name;
         if(name.charAt(name.length()-1) == '7')
         {
             return 0;
